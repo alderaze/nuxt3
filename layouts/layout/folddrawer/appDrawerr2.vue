@@ -1,14 +1,12 @@
 <template>
   <div >
-
     <v-list-item
-      class=" hov color-icon rounded mt-4 item-nav"
+      class=" hov color-icon pl-1 ml-0 rounded mt-4 item-nav"
       style=""
       router
       v-for="(item, index) in acounts" :key="index"
       active-class="activebar"
       @click="val(index)"
-
     
     >
     <v-badge
@@ -38,8 +36,6 @@ export default {
         then(res => {
             this.numbermess = "message "+res.length
                 this.acounts = res
-
-                console.log(this.acounts)
         })
 
     },

@@ -8,20 +8,34 @@
       :clipped="true"
       :src="groundnav"
       height="100vh"
-      mini-variant-width="70"
+      :mini-variant-width="$vuetify.breakpoint.mdAndUp?70:320"
       enable-resize-watcher
       app
     >
       <app-Drawerr class="px-2 hidden-sm-and-down" />
+
+
+      <app-Drawersm 
+      :movedr="movedr"
+      :cholddra="cholddra"
+      @showChils="cholddra = $event"
+      @mainmov="movedr = $event"
+      class="px-2 hidden-md-and-up" />
+
+
+      <app-Drawersmone 
+      :cholddra="cholddra"
+      :movedr="movedr"
+      @mainmov2="movedr = $event"
+      class="px-2 hidden-md-and-up"  />
     </v-navigation-drawer>
 
     <v-navigation-drawer
-      v-model="drawer"
+      class="px-2 hidden-sm-and-down"
       right
       id="default-drawer"
       :mini-variant="true"
       :clipped="true"
-      :src="groundnav"
       height="100vh"
       mini-variant-width="70"
       enable-resize-watcher
@@ -29,20 +43,29 @@
     >
       <app-Drawerr2 class=" hidden-sm-and-down" />
     </v-navigation-drawer>
-    <app-Navheader :drawer="drawer" @changemini="drawer= $event" />
+    <app-Navheader 
+    :drawer="drawer"
+    @changemini="drawer= $event"
+    />
   </div>
 </template>
 
 <script>
 import appNavheader from "./appNavheader";
-import appDrawerr from "./appDrawerr";
-import appDrawerr2 from "./appDrawerr2";
+import appDrawerr from "./folddrawer/appDrawerr";
+import appDrawerr2 from "./folddrawer/appDrawerr2";
+import appDrawersm from "./folddrawer/appDrawersm";
+import appDrawersmone from "./folddrawer/appDrawersmone";
 
 import { mapGetters, mapMutations } from "vuex";
 export default {
   data() {
     return {
-      drawer:true
+      drawer:true,
+      small:true,
+      movedr:false,
+      cholddra:[false,false,false,false,false,false,false]
+
     };
   },
   computed: {
@@ -57,11 +80,18 @@ export default {
     appNavheader,
     appDrawerr,
     appDrawerr2,
+    appDrawersm,
+    appDrawersmone,
   },
 };
 </script>
 
+<style>
 
+.alderaze{
+  display: none;
+}
+</style>
 
 
 

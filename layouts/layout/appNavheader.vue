@@ -61,11 +61,10 @@ export default {
   methods: {
     ...mapMutations("naving", ["setmini", "retdrawer"]),
     restdraw() {
-      this.toggel = !this.toggel
       let r = this.drawer;
       r = !r;
       this.$emit("changemini", r);
-      console.log(this.drawer);
+      
     }
 
   },

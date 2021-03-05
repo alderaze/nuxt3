@@ -182,9 +182,9 @@
                             :key="n"
                             :class="$vuetify.theme.dark?'hovNav':'hovNavlight'"
                             >
-                            <v-list-title>
+                            <v-list-item-title>
                                
-                            </v-list-title>
+                            </v-list-item-title>
                             <v-list-item-title class="font-weight-medium  body-2">
                                 <v-icon class="pr-1" size="15">
                                     {{i.icon}}
