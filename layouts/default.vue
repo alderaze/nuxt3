@@ -1,5 +1,5 @@
 <template>
-  <v-app dark >
+  <v-app dark :style="!$vuetify.theme.dark?'background:#f4f2f2':''">
   <app-Nave/>
   <app-Sittings/>
     <v-main>

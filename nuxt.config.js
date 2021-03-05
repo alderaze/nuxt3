@@ -33,7 +33,6 @@ export default {
   plugins: [
     {src:"~/plugins/animate",ssr:false},
 
-    {src:"~/plugins/aos",ssr:false},
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -63,6 +62,7 @@ export default {
     icons: {
       iconfont: "fa",
     },
+    theme: { dark: true },
    
   },
   router: {

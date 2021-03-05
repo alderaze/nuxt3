@@ -1,71 +1,62 @@
 <template>
   <div class="px-5">
     <v-navigation-drawer
-      id="default-drawer"
       v-model="drawer"
-      :mini-variant.sync="mini"
-      :clipped="clipped"
-      style="background: #363636"
+      class=""
+      id="default-drawer"
+      :mini-variant="true"
+      :clipped="true"
       :src="groundnav"
-      width="260"
       height="100vh"
-      mini-variant-width="85"
+      mini-variant-width="70"
       enable-resize-watcher
       app
-      :right="$vuetify.rtl"
     >
-      <v-overlay
-        z-index="-1"
-        style="background: rgba(0, 0, 0, 0.5)"
-      ></v-overlay>
-      <app-Drawerr class="px-2" />
+      <app-Drawerr class="px-2 hidden-sm-and-down" />
     </v-navigation-drawer>
-    <app-Navheader 
-    :drawer="drawer" 
-    @changemini="drawer = $event" 
-    @changeclipped="clipped = $event" 
-    :clipped="clipped"
-    />
+
+    <v-navigation-drawer
+      v-model="drawer"
+      right
+      id="default-drawer"
+      :mini-variant="true"
+      :clipped="true"
+      :src="groundnav"
+      height="100vh"
+      mini-variant-width="70"
+      enable-resize-watcher
+      app
+    >
+      <app-Drawerr2 class=" hidden-sm-and-down" />
+    </v-navigation-drawer>
+    <app-Navheader :drawer="drawer" @changemini="drawer= $event" />
   </div>
 </template>
 
 <script>
 import appNavheader from "./appNavheader";
 import appDrawerr from "./appDrawerr";
+import appDrawerr2 from "./appDrawerr2";
 
 import { mapGetters, mapMutations } from "vuex";
 export default {
-  // props: ["drawerr"],
-
   data() {
     return {
-      drawer: true,
-      clipped:false,
+      drawer:true
     };
   },
   computed: {
     ...mapGetters(["maincolor", "colortext", "groundnav"]),
-    mini: {
-      get() {
-        return this.$store.getters["naving/minii"];
-      },
-      set() {
-        return this.$store.commit("naving/setmini");
-      },
-    },
 
-    restdraw() {
-      let r = this.drawerr;
-      return r;
-    },
+    
   },
   methods: {
-    ...mapMutations("naving", ["setdr", "setmini"]),
   },
 
   components: {
     appNavheader,
     appDrawerr,
+    appDrawerr2,
   },
 };
 </script>

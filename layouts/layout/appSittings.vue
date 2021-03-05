@@ -7,8 +7,8 @@
       :right="$vuetify.rtl"
       :left="!$vuetify.rtl"
       transition="scale-transition"
-      nudge-top="0"
       :nudge-left="$vuetify.rtl ? -10 : 10"
+      :nudge-top="100"
       max-width="300px"
       :origin="$vuetify.rtl ? 'left top' : 'right top'"
       :offset-x="offset"
@@ -321,7 +321,7 @@ export default {
 .menue {
   width: 56px;
   right: 0px;
-  top: 110px;
+  top: 10px;
   box-shadow: none !important;
   position: fixed !important;
   background: rgba(0, 0, 0, 0.2);
