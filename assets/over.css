@@ -1,2 +1,10 @@
+.theme--dark.v-card {
+    background-color: #424242!important;
+    color: #FFFFFF;
+}
 
+.comain.theme--dark.v-sheet{
 
+    background-color: transparent!important;
+
+}

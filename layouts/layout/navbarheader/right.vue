@@ -77,7 +77,7 @@
                         v-for="(it,ind) in item.acount"
                         :key="ind"
                         :class="$vuetify.theme.dark?'hovNav':'hovNavlight'"
-                        class="mb-5"
+                        class="mb-5 pa-3"
                         >
                         <v-badge
                         bordered
@@ -138,7 +138,8 @@
                         </v-list>
                     </v-menu>
 
-                <!-- start message -->
+                <!-- end message -->
+                <!-- start portfilo -->
 
                 <v-menu
                     class="alderaze"
@@ -180,12 +181,10 @@
                             <v-list-item
                             v-for="(i,n) in infoperson"
                             :key="n"
+                            class="d-block"
                             :class="$vuetify.theme.dark?'hovNav':'hovNavlight'"
                             >
-                            <v-list-item-title>
-                               
-                            </v-list-item-title>
-                            <v-list-item-title class="font-weight-medium  body-2">
+                            <v-list-item-title class="font-weight- py-3  body-2">
                                 <v-icon class="pr-1" size="15">
                                     {{i.icon}}
                                 </v-icon>

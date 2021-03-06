@@ -1,5 +1,5 @@
 <template>
-  <v-app dark :style="!$vuetify.theme.dark?'background:#f4f2f2':''">
+  <v-app class="dd" dark :style="!$vuetify.theme.dark?'background:#f4f2f2':'background:#505050'">
   <app-Nave/>
   <app-Sittings/>
     <v-main>
@@ -33,3 +33,9 @@ export default {
   middleware:"med"
 }
 </script>
+
+<style >
+
+  
+</style>
+
