@@ -10,7 +10,15 @@
       cols="12"
       :class="$vuetify.breakpoint.smAndDown?'order-2':'order-1'" 
       >
-      <posts/>
+      <posts 
+      v-for="(item, index) in posts" 
+      :body="item.body"
+      :name="item.name"
+      :commints="item.commints"
+      :id="index" 
+      :key="index"
+      @cha="body = $event"
+      />
 
       </v-col>
       <v-col 
@@ -43,15 +51,10 @@ export default {
       $axios.$get("http://localhost:5000/posts")
       .then(res => {
         store.commit("getposts",res)
-      });
+      }).
+      catch(reg => console.log(reg))
+      ;
   },
-  // fetch({$axios,store}) {
-  //   return $axios.$get("http://localhost:5000/posts")
-  //     .then(res => {
-  //       store.commit("getposts",res)
-  //     });
-  // },
-  
 
   data(){
     return{
@@ -62,7 +65,7 @@ export default {
  
   
   computed: {
-    ...mapGetters(["colortext", "maincolor"]),
+    ...mapGetters(["colortext", "maincolor","posts"]),
 
   },
     methods:{

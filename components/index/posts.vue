@@ -1,10 +1,50 @@
 <template>
     <div>
-        <v-card class="mb-5 pa-4 pt-1" flat v-for="(item, index) in posts" :key="index">
+        <v-card class="mb-5 pa-4 pt-1" flat >
+            <v-btn @click="dialog2 = true,openn()" 
+            width="40" 
+            height="40" 
+            icon 
+            class="editpost">
+                <v-icon size="15">
+                    far fa-edit
+                </v-icon>
+            </v-btn>
+            <edit :dialog2="dialog2">
+                
+                
+                <v-card flat class="pa-3 mb-0 pb-0">
+                    <v-textarea
+                        v-model="editPostData"
+                        auto-grow
+                        filled
+                        placeholder="enter your commint"
+                        rows="1"
+                ></v-textarea>
+
+                <v-card-actions class="pa-0 pb-2 ma-0">
+                <v-spacer></v-spacer>
+                <v-btn
+                    color="error darken-1"
+                    text
+                    @click="dialog2 = false"
+                >
+                    Close
+                </v-btn>
+                <v-btn
+                    color="green darken-1"
+                    text
+                    @click="dialog2 = false,restt(parseInt(id)+1,editPostData)"
+                >
+                    Save
+                </v-btn>
+                </v-card-actions>
+                </v-card>
+                
+            </edit>
             <v-list-item
             class="  color-icon pl-1 ml-0 rounded mt-4 item-nav"
             style=""
-            
             >
             <v-badge
                 bordered
@@ -21,15 +61,15 @@
                 </v-badge>
                 <div class="ml-4 pt-3">
                     <p class="mb-0">
-                        alderaze
+                    {{name}}
                     </p>
                     <p class="caption grey--text" >
-                    data
+                    1 week
                     </p>
                 </div>
             </v-list-item>
             <v-card-text>
-                {{item.body}}
+                {{editPostData2}}
             </v-card-text>
             <div >
                 <v-badge
@@ -56,83 +96,129 @@
                 <div class="d-inline-block mianicon ml-2 pa-0">
                     <v-btn
                     @click="hover = !hover"
-                    color="black"
+                    :color="maincolor"
                     fab
                     class="pa-0"
                     max-height="30px"
                     max-width="30px"
                     >
-                    <v-icon :color="maincolor" size="18">
+                    <v-icon  size="18">
                         fa-share-alt
                     </v-icon>
                     </v-btn>
-                    <v-btn fab
+                    <v-btn 
+                    :color="maincolor"
+                    fab
                     class="pa-0 posicon"
                     max-height="30px"
                     max-width="30px"  
                     :class="hover?'posicon1' :''" >
-                    <v-icon size="15">fa-share-alt </v-icon>
+                    <v-icon size="15">fab fa-html5</v-icon>
                     </v-btn>
-                    <v-btn color="black"
+                    <v-btn 
+                    :color="maincolor"
                     fab
                     class="pa-0 posicon"
                     max-height="30px"
                     max-width="30px"  
                     :class="hover?'posicon2':''" >
-                    <v-icon size="15">fa-share-alt </v-icon>
+                    <v-icon size="15">fab fa-instagram</v-icon>
                     </v-btn>
-                    <v-btn color="black"
+                    <v-btn 
+                    :color="maincolor"
                     fab
                     class="pa-0 posicon"
                     max-height="30px"
-                    max-width="30px"  :class="hover?'posicon3':''"><v-icon size="15">fa-share-alt </v-icon></v-btn>
-                    <v-btn color="black"
+                    max-width="30px"  
+                    :class="hover?'posicon3':''">
+                    <v-icon size="15">fab fa-twitter </v-icon>
+                    </v-btn>
+                    <v-btn 
+                    :color="maincolor"
                     fab
                     class="pa-0 posicon"
                     max-height="30px"
                     max-width="30px"  
                     :class="hover?'posicon4':''">
-                    <v-icon size="15">fa-share-alt </v-icon>
+                    <v-icon size="15">fab fa-google-plus </v-icon>
                     </v-btn>
-                    <v-btn color="black"
+                    <v-btn
+                    :color="maincolor"
                     fab
                     class="pa-0 posicon"
                     max-height="30px"
                     max-width="30px"  
                     :class="hover?'posicon5':''" 
-                    ><v-icon size="15">fa-share-alt </v-icon>
+                    ><v-icon size="15">fab fa-facebook-f </v-icon>
                     </v-btn>
                 </div>
-
                 </div>
+                <v-divider class="my-5"></v-divider>
 
+
+
+                
+
+                <commint :commints="commints" :id="id"/>
                 
         </v-card>
     </div>
 </template>
 <script>
+
+import commint from "./commint"
+import edit from "./edit"
 import {mapGetters,mapMutations} from "vuex"
 export default {
-    
+    props:["body","name","commints","id"],
     data(){
         return{
+            dialog2: false,
             hover:false,
-            iconpsot:["far fa-eye","far fa-heart","far fa-comment-dots"]
+            iconpsot:["far fa-eye","far fa-heart","far fa-comment-dots"],
+            editPostData:'',
+            editPostData2 :this.body
 
         }
     
     },
     computed:{
-        ...mapGetters(["colortext","maincolor","posts"])
+        ...mapGetters(["colortext","maincolor"]),
     },
     methods:{
 
-    }
+        openn(){
+            this.editPostData = this.editPostData2
+        },
+        restt(id,val){
+            return this.$axios.$patch(`http://localhost:5000/posts/${id}`,{
+                body:val
+            })
+            .then(res => {
+                console.log(res)
+                this.editPostData2 = this.editPostData
+            }).
+            catch(reg => console.log(reg))
+            ;
+        },
+        
+ 
+        
+
+    },
+    components:{commint,edit}
 }
 
 </script>
 
 <style >
+.editpost{
+    position: absolute;
+    right: 9px;
+    top: 12px;
+    cursor: pointer!important;
+    z-index: 2;
+}
 .mianicon{
     position: relative!important;
 }
@@ -163,15 +249,15 @@ export default {
 }
 .posicon5{
     z-index: 1;
-    transform: translate(-12px,-40px) rotate(0deg) !important;
+    transform: translate(-3px,-43px) rotate(0deg) !important;
     opacity: 1;
 
     
 }
 .posicon1{
     z-index: 1;
-    transform: translate(-41px,-5px) rotate(0deg) !important;
-    opacity: 1;
+    transform: translate(-44px,-8px) rotate(0deg) !important;
+    opacity: 1
 
 }
 </style>

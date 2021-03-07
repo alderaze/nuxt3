@@ -8,7 +8,12 @@ const storee ={
       frinds :[],
       frindSearch :[],
       searchName:"",
-      posts:[]
+      posts:[],
+      mycommint:{
+        img:"",
+        name:"alderaze",
+        title:""
+      }
   }),
 getters:{
   frindSearch(state){
@@ -19,6 +24,10 @@ getters:{
   },
   posts(state){
     return state.posts
+  },
+
+  myCommintTitle(state){
+    return state.mycommint.title
   }
 },
   mutations: {
@@ -35,12 +44,12 @@ getters:{
     fill(state,val){
       return state.searchName = val      
     },
-
-
-
     getposts(stats,u){
       return stats.posts = u
     },
+    enterCommintTit(state,val){
+      return state.mycommint.title = val
+    }
 
 
   },
