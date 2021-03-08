@@ -1,7 +1,7 @@
 <template>
     <div>
 
-        <v-card   class="mt-5" flat v-for="(i, n) in commints" :key="n">
+        <v-card   class="mt-5" flat v-for="(i, n) in commints3" :key="n">
 
                     <v-list-item
                         class="align-start color-icon pl-1 ml-0 rounded mt-4 item-nav"
@@ -21,7 +21,7 @@
                             </v-avatar>
                                         
                             </v-badge>
-                        <v-card class="ml-4"  outlined flat>
+                        <v-card class="ml-4" width="100%"  outlined flat>
 
                             <!-- edite commint -->
                             <v-btn @click="dialog3 = true" 
@@ -59,7 +59,7 @@
                                 <v-btn
                                     color="green darken-1"
                                     text
-                                    @click="dialog3 = false,restt()"
+                                    @click="dialog3 = false"
                                 >
                                     Save
                                 </v-btn>
@@ -72,7 +72,7 @@
 
 
 
-                            <v-card-title class="body-1 pb-0">
+                            <v-card-title  class="body-1 pb-0">
                                 {{i.name}}
                             </v-card-title>
                             <p class="caption pl-5 grey--text">2 hour ago</p>
@@ -114,6 +114,8 @@
                         color="deep-purple"
                         placeholder="enter your commint"
                         rows="1"
+                        v-model="enterComment"
+                        @keyup.enter="restt(id,editcommint,'https://cdn.vuetifyjs.com/images/lists/2.jpg','alderaze',enterComment)"
                         ></v-textarea>
                         
                         </v-list-item>
@@ -127,21 +129,34 @@
 import edit from "./edit"
 
 export default {
-    props:["commints","id"],
+    props:["commints3","id"],
     data(){
         return{
+            enterComment:'',
             dialog3:false,
-            mycommint: this.commints,
-            editcommint:''
+            mycommint: this.commints3,
+            editcommint:this.commints3,
         }
     },
     methods: {
 
-        restt(){
-            return this.$axios.$patch(`http://localhost:5000/posts/1/?title/="alderaze"`,{
+        restt(id,val,img,name,title){
+            return this.$axios.$patch(`http://localhost:5000/posts/${id}?_commints`,{
+
+        commints : [
+            
+            ...val.splice(0,0,
+             {img:img,
+            name:name,
+            title:title}),
+            ...val.reverse()
+
+        ],
+
             })
             .then(res => {
-                console.log(res)
+                this.enterComment = ''
+                
             }).
             catch(reg => console.log(reg))
             ;

@@ -14,7 +14,7 @@
       v-for="(item, index) in posts" 
       :body="item.body"
       :name="item.name"
-      :commints="item.commints"
+      :commints2="item.commints"
       :id="index" 
       :key="index"
       @cha="body = $event"

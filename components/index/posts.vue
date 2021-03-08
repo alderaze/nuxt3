@@ -159,7 +159,7 @@
 
                 
 
-                <commint :commints="commints" :id="id"/>
+                <commint :commints3="commints2" :id="id"/>
                 
         </v-card>
     </div>
@@ -170,7 +170,7 @@ import commint from "./commint"
 import edit from "./edit"
 import {mapGetters,mapMutations} from "vuex"
 export default {
-    props:["body","name","commints","id"],
+    props:["body","name","commints2","id"],
     data(){
         return{
             dialog2: false,
